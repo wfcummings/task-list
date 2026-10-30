@@ -14,6 +14,9 @@ app.use(getUserFromToken);
 import usersRouter from "#api/users";
 app.use("/users", usersRouter);
 
+import tasksRouter from "#api/tasks";
+app.use("/tasks", tasksRouter);
+
 app.use((err, req, res, next) => {
   switch (err.code) {
     // Invalid type
