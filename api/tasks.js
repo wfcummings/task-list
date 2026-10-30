@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 export default router;
 
-import { createTask, updateTaskById } from "#db/queries/tasks";
+import { createTask, deleteTaskById, updateTaskById } from "#db/queries/tasks";
 import { getTasksByUserId, getTaskById } from "#db/queries/tasks";
 
 import requireUser from "#middleware/requireUser";
@@ -39,4 +39,9 @@ router.put("/:id", requireBody(["title", "done"]), async (req, res) => {
   const { title, done } = req.body;
   const task = await updateTaskById(req.task.id, title, done);
   res.send(task);
+});
+
+router.delete("/:id", async (req, res) => {
+  const task = await deleteTaskById(req.task.id);
+  res.status(204).send(task);
 });
